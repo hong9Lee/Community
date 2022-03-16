@@ -1,0 +1,107 @@
+#server:
+#  port: 8070
+#
+#spring:
+#  sql:
+#    init:
+#      data-location: classpath:data.sql
+##      schema-locations:
+#  jpa:
+#    generate-ddl: true
+#    defer-datasources-initialization: true
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+#
+#    hibernate:
+#      ddl-auto: create-drop
+#  #      ddl-auto: none
+#
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/community
+#    username: root
+#    password: 102030
+#    initialization-mode: always
+#
+#  h2:
+#    console:
+#      enabled: true
+#
+#
+#
+#
+#
+#
+##  datasource:
+##    url: jdbc:h2:tcp://localhost/~/community
+##    username: sa
+##    password:
+##    driver-class-name: org.h2.Driver
+#
+#
+#
+#
+#
+##logging:
+##  level:
+##    root: debug
+#
+##logging:
+##  level:
+##    root: error
+##    org:
+##      hibernate:
+##        type:
+##          descriptor:
+##            sql: trace
+
+
+
+
+
+
+
+
+spring:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+    generate-ddl: true # ??? ?? ??
+    hibernate:
+      ddl-auto: create-drop
+
+  #  datasource:
+  #    url: jdbc:h2:tcp://localhost/~/community
+  #    username: sa
+  #    password:
+  #    driver-class-name: org.h2.Driver
+
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/community
+#    username: root
+#    password: 102030
+#    initialization-mode: always # data.sql loding
+server:
+  port: 8070
+
+
+#logging:
+#  level:
+#    root: debug
+
+#logging:
+#  level:
+#    root: error
+#    org:
+#      hibernate:
+#        type:
+#          descriptor:
+#            sql: trace
