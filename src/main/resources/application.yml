@@ -64,6 +64,10 @@
 
 
 spring:
+  cache:
+    ehcache:
+      config: classpath:ehcache.xml
+
   h2:
     console:
       enabled: true
@@ -72,11 +76,33 @@ spring:
     show-sql: true
     properties:
       hibernate:
+
+#        cache:
+#          use_second_level_cache: true
+#          region:
+#            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
+
         format_sql: true
+        jdbc:
+          batch_size: 1000
+        order_inserts: true
+        order_updates: true
 
     generate-ddl: true # ??? ?? ??
     hibernate:
-      ddl-auto: create-drop
+#      cache:
+#        use_second_level_cache: true
+#        use_query_cache: true
+#        provider_class: net.sf.ehcache.hibernate.EhCacheProvider
+      ddl-auto: none
+#      ddl-auto: create-drop
+
+#    javax:
+#      persistence:
+#        sharedCache:
+#          mode: ENABLE_SELECTIVE
+
+
 
   #  datasource:
   #    url: jdbc:h2:tcp://localhost/~/community
@@ -84,11 +110,16 @@ spring:
   #    password:
   #    driver-class-name: org.h2.Driver
 
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/community
-#    username: root
-#    password: 102030
-#    initialization-mode: always # data.sql loding
+  datasource:
+    url: jdbc:mysql://localhost:3306/community
+    username: root
+    password: 102030
+    initialization-mode: always # data.sql loding
+#    hikari:
+#      data-source-properties:
+#        rewriteBatchedStatements: true
+
+
 server:
   port: 8070
 

@@ -13,12 +13,16 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@Table(indexes = @Index(name = "i_user", columnList = "nickname"))
+@Cacheable // 엔티티 캐시
 public class User extends BaseTimeEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long id; // 회원id
 
@@ -54,6 +58,13 @@ public class User extends BaseTimeEntity {
             return "(임차인)";
         }
         return "";
+    }
+
+    @Builder
+    public User(String nickName, String accountId, String quit) {
+        this.nickName = nickName;
+        this.accountId = accountId;
+        this.quit = quit;
     }
 
 

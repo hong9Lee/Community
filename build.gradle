@@ -16,6 +16,11 @@ configurations {
 
 repositories {
 	mavenCentral()
+
+}
+
+dependencies {
+
 }
 
 dependencies {
@@ -25,12 +30,21 @@ dependencies {
 	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2'
 	implementation 'com.google.code.gson:gson:2.8.5'
 
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
+	implementation group: 'net.sf.ehcache', name: 'ehcache', version: '2.9.1'
+
+//	compileOnly('org.springframework.boot:spring-boot-starter-cache')
+//	compileOnly group: 'net.sf.ehcache', name: 'ehcache', version: '2.9.0'
+
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	runtimeOnly 'mysql:mysql-connector-java'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
+
+
 
 tasks.named('test') {
 	useJUnitPlatform()
