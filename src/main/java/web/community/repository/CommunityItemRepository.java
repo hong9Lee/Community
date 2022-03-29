@@ -3,6 +3,7 @@ package web.community.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import web.community.domain.Comments;
 import web.community.domain.CommunityItem;
 import java.util.List;
 import java.util.Optional;
@@ -27,5 +28,10 @@ public interface CommunityItemRepository extends JpaRepository<CommunityItem, Lo
     /** 가장 최근 데이터 가져오기 */
     @Query(value = "select * from community_item i order by i.id desc limit 1", nativeQuery = true)
     Optional<CommunityItem> findLast();
+
+
+    /** N+1 회피를 위해 FetchJoin */
+    @Query("select DISTINCT a from CommunityItem a join fetch a.commentsList")
+    List<CommunityItem> findAllJoinFetch();
 
 }

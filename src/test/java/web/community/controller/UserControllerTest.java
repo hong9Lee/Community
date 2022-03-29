@@ -26,7 +26,7 @@ class UserControllerTest {
 
 
     @Test
-//    @Transactional
+    @Transactional
     public void jpaBulkInsertTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
                         .post("/api/bulk/saveTest")
@@ -44,14 +44,9 @@ class UserControllerTest {
     @Test
     @Transactional
     public void cachingTest() {
-
-
         long start = System.currentTimeMillis();
-//        List<User> all = userRepository.findAll();
-        User user = userService.findUsersByIndex();
+        userService.findUsersByIndex();
         System.out.println("elapsed time : " + (System.currentTimeMillis() - start));
-//        CacheManager cacheManager = ehCacheManager.getCacheManager();
-
     }
 
 }

@@ -26,11 +26,8 @@ public class UserController {
     @GetMapping("/api/cache/test")
     public void cacheTest() {
         long start = System.currentTimeMillis();
-        //        List<User> all = userRepository.findAll();
         User user = userService.findUsersByIndex();
-        System.out.println(user);
         System.out.println("elapsed time : " + (System.currentTimeMillis() - start));
-//        CacheManager cacheManager = ehCacheManager.getCacheManager();
     }
 
 
