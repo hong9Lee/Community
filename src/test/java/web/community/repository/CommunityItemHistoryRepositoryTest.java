@@ -18,21 +18,21 @@ class CommunityItemHistoryRepositoryTest {
     @Test
     @Transactional
     void itemHistoryTest() {
-        CommunityItem item = new CommunityItem();
-        item.setTitle("History Listener Title Test 1");
-        item.setContents("History Listener Contents Test 1");
-        communityItemRepository.save(item);
-
-        em.flush();
-        em.clear();
-
-        item.setTitle("History Listener Title Test 2");
-        item.setContents("History Listener Contents Test 2");
-        communityItemRepository.save(item);
-
-        em.flush();
-        em.clear();
-
-        communityItemRepository.deleteById(item.getId());
+//        CommunityItem item = new CommunityItem();
+//        item.setTitle("History Listener Title Test 1");
+//        item.setContents("History Listener Contents Test 1");
+//        communityItemRepository.save(item);
+//
+//        em.flush();
+//        em.clear();
+//
+//        item.setTitle("History Listener Title Test 2");
+//        item.setContents("History Listener Contents Test 2");
+//        communityItemRepository.save(item);
+//
+//        em.flush();
+//        em.clear();
+//
+//        communityItemRepository.deleteById(item.getId());
     }
 }

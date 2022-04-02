@@ -21,15 +21,13 @@ import java.util.List;
 public class User extends BaseTimeEntity {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", unique = true)
     private Long id; // 회원id
 
     private String publicName; // 화면에 표출될 nickName + accountType
     private String nickName; // 닉네임
     private String accountId; // 계정ID
-
 
     @Enumerated(EnumType.STRING)
     private AccountType accountType; // 계정타입 ( LESSOR : 임대인, REALTOR : 공인 중개사, LESSEE : 임차인 )
@@ -37,6 +35,7 @@ public class User extends BaseTimeEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user"
             , cascade = {CascadeType.ALL}
+            , orphanRemoval = true
     )
     @ToString.Exclude
     private List<CommunityItem> communityItemList = new ArrayList<>();
@@ -45,11 +44,7 @@ public class User extends BaseTimeEntity {
         Collections.addAll(this.communityItemList, communityItems);
     }
 
-    public void setPublicName() {
-        this.publicName = this.nickName + addPublicName();
-    }
-
-    public String addPublicName() {
+    public String setPublicName() {
         if (this.accountType == AccountType.LESSOR) {
             return "(임대인)";
         } else if (this.accountType == AccountType.REALTOR) {

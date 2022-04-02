@@ -9,24 +9,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import web.community.domain.Likes;
-import web.community.repository.CommunityItemRepository;
 import web.community.repository.LikesRepository;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@WebMvcTest
 @SpringBootTest
 @AutoConfigureMockMvc
 class LikesControllerTest {
 
     @Autowired private MockMvc mockMvc;
     @Autowired private LikesRepository likesRepository;
-    @Autowired private CommunityItemRepository communityItemRepository;
 
     @Test
     @Description("like 갯수 증가 테스트")
@@ -60,6 +54,7 @@ class LikesControllerTest {
                 .andExpect(content().string("success"));
 
         int afterLikeCount = likesRepository.findLikeCount(5L);
+
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/community/likes/5")

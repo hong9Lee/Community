@@ -1,7 +1,5 @@
 package web.community.helper.enums;
 
-import lombok.Data;
-
 public enum ResponseStatusType {
     OK("200", "SUCCESS"),
     BAD_REQUEST("400", "BAD REQUEST"),

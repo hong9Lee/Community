@@ -22,8 +22,8 @@ public class CommunityItemController {
      authorization ex)
         Request Header -> Authorization -> LESSEO 1
      */
-    @GetMapping("/community/getItemsAll")
-    public ResponseEntity getItemAll(@RequestHeader String authorization) {
+    @GetMapping("/community/items")
+    public ResponseEntity getItemList(@RequestHeader String authorization) {
         ResponseDTO.ResData res = commService.getCommunityItemAll(authorization);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
@@ -41,7 +41,7 @@ public class CommunityItemController {
         Request Header -> Authorization -> LESSEO 1
 
     */
-    @PostMapping("/community/saveItem")
+    @PostMapping("/community/items")
     public ResponseEntity saveItem(@Valid @RequestBody CommunityItemDTO.SaveItemDTO itemDTO,
                                    @RequestHeader String authorization) {
         ResponseDTO.ResDefault res = commService.saveCommunityItem(itemDTO, authorization);
@@ -51,26 +51,21 @@ public class CommunityItemController {
     /**
      3. Community 게시글 업데이트
      */
-    @PostMapping("/community/updateItem/{id}")
+    @PostMapping("/community/items/{id}")
     public ResponseEntity updateItem(@Valid @RequestBody CommunityItemDTO.UpdateItemDTO itemDTO,
                                      @PathVariable("id") Long itemId) {
 
-        Object res = commService.update(itemDTO, itemId);
+        Object res = commService.updateItem(itemDTO, itemId);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     /**
      4. Community 게시글 삭제
      */
-    @DeleteMapping("/community/deleteItem/{id}")
+    @DeleteMapping("/community/items/{id}")
     public ResponseEntity deleteItem(@PathVariable("id") Long id,
                                      @RequestHeader String authorization) {
         ResponseDTO.ResDefault res = commService.deleteItem(id, authorization);
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
-
-
-
-
-
 }

@@ -39,7 +39,7 @@ class CommunityItemControllerTest {
         int allDataSize = allData.size();
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/community/getItemsAll")
+                        .get("/community/items")
                         .header(HttpHeaders.AUTHORIZATION, "LESSOR 1")
                 )
                 .andExpect(status().isOk())
@@ -50,7 +50,7 @@ class CommunityItemControllerTest {
     @Description("Request Header에 Authorization 값이 Null인 경우 테스트")
     void getAllDataByAuthNullTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/community/getItemsAll")
+                        .get("/community/items")
                 )
                 .andExpect(status().isBadRequest());
     }
@@ -59,7 +59,7 @@ class CommunityItemControllerTest {
     @Description("Request Header에 Authorization 값이 잘못된 경우 테스트")
     void getAllDataByWrongAuthTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/community/getItemsAll")
+                        .get("/community/items")
                         .header(HttpHeaders.AUTHORIZATION, "LES")
                 )
                 .andExpect(status().isInternalServerError());
@@ -79,7 +79,7 @@ class CommunityItemControllerTest {
         ObjectMapper mapper = new ObjectMapper();
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/community/saveItem")
+                        .post("/community/items")
                         .header(HttpHeaders.AUTHORIZATION, "REALTOR 4")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(mapper.writeValueAsString(saveItemDTO))
@@ -103,7 +103,7 @@ class CommunityItemControllerTest {
         ObjectMapper mapper = new ObjectMapper();
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/community/saveItem")
+                        .post("/community/items")
                         .header(HttpHeaders.AUTHORIZATION, "REALTOR 4")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(saveItemDTO))
@@ -122,7 +122,7 @@ class CommunityItemControllerTest {
         ObjectMapper mapper = new ObjectMapper();
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/community/saveItem")
+                        .post("/community/items")
                         .header(HttpHeaders.AUTHORIZATION, "")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(saveItemDTO))
@@ -143,7 +143,7 @@ class CommunityItemControllerTest {
         ObjectMapper mapper = new ObjectMapper();
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/community/updateItem/5")
+                        .post("/community/items/5")
                         .header(HttpHeaders.AUTHORIZATION, "LESSEE 5")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(updateItemDTO))
@@ -162,7 +162,7 @@ class CommunityItemControllerTest {
     void deleteItemTest() throws Exception {
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/community/deleteItem/1")
+                        .delete("/community/items/1")
                         .header(HttpHeaders.AUTHORIZATION, "LESSOR 1")
                         .contentType(MediaType.APPLICATION_JSON)
                 )

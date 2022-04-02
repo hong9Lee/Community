@@ -23,10 +23,10 @@ Controller의 경우 PostMan을 검증에 활용함.
         
 2) url, param
  * 전체 게시글 검색
-  -> URL : GET /community/getItemsAll 
+  -> URL : GET /community/items 
  
  * 게시글 추가
-  -> URL : POST /community/saveItem
+  -> URL : POST /community/items
   -> PARAM ex) :
          {
          "title" : "또 이용하고 싶어요.",
@@ -34,7 +34,7 @@ Controller의 경우 PostMan을 검증에 활용함.
          }
  
  * 게시글 업데이트
-  -> URL : POST /community/updateItem/{id}
+  -> URL : POST /community/items/{id}
   -> PARAM ex) :
          {
          "title" : "또 이용하고 싶어요.",
@@ -42,4 +42,4 @@ Controller의 경우 PostMan을 검증에 활용함.
          }
          
  * 게시글 삭제
-  -> URL : DELETE /community/deleteItem/{id}
+  -> URL : DELETE /community/items/{id}

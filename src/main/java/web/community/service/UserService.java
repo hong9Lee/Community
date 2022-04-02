@@ -1,18 +1,13 @@
 package web.community.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.community.domain.User;
 import web.community.repository.UserRepository;
-
-
-import javax.persistence.EntityManager;
 import java.util.ArrayList;
 
 @Service
@@ -21,15 +16,10 @@ import java.util.ArrayList;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final EntityManager em;
     private final CacheManager cacheManager;
-
-
-
 
     @Value("${spring.jpa.properties.hibernate.jdbc.batch_size}")
     private int batchSize;
-
 
     public void saveUsers() {
         ArrayList<User> list = new ArrayList<>();
@@ -49,11 +39,10 @@ public class UserService {
 
     @Cacheable(cacheNames = "findUserCache")
     public User findUsersByIndex() {
-//        System.out.println("\n\n" + "=========================================================\n"
-//                + "Using cache manager: " + this.cacheManager.getClass().getName() + "\n"
-//                + "=========================================================\n\n");
-//        Cache findUserCache = cacheManager.getCache("findUserCache");
-//        System.out.println(findUserCache);
+
+        System.out.println("\n\n" + "=========================================================\n"
+                + "Using cache manager: " + this.cacheManager.getClass().getName() + "\n"
+                + "=========================================================\n\n");
         return userRepository.findByNickName("test 4997");
     }
 

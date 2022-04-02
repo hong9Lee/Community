@@ -12,7 +12,8 @@
            diskSpoolBufferSizeMB="20"
            timeToIdleSeconds="300" timeToLiveSeconds="6"
            memoryStoreEvictionPolicy="LFU"
-           transactionalMode="off">
+           transactionalMode="off"
+    >
     </cache>
 
 </ehcache>

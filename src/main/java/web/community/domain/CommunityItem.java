@@ -38,6 +38,7 @@ public class CommunityItem extends BaseTimeEntity {
             mappedBy = "communityItem"
             , fetch = FetchType.LAZY
             , cascade = {CascadeType.ALL}
+            , orphanRemoval = true
     )
     @ToString.Exclude
     private List<Likes> likedList = new ArrayList<>();
@@ -45,12 +46,13 @@ public class CommunityItem extends BaseTimeEntity {
     @OneToMany(mappedBy = "communityItem"
             , fetch = FetchType.LAZY
             , cascade = {CascadeType.ALL}
+            , orphanRemoval = true
     )
     @ToString.Exclude
     private List<Comments> commentsList = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "community_item_id", insertable = false, updatable = false)
+    @JoinColumn(name = "community_item_id")
     @ToString.Exclude
     private List<CommunityItemHistory> itemHistoryList = new ArrayList<>();
 

@@ -20,7 +20,7 @@ spring:
 #            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory
         show_sql: true
         format_sql: true
-        generate_statistics: true
+#        generate_statistics: true
 
         jdbc:
           batch_size: 1000
@@ -33,8 +33,8 @@ spring:
 #        use_second_level_cache: true
 #        use_query_cache: true
 #        provider_class: net.sf.ehcache.hibernate.EhCacheProvider
-      ddl-auto: none
-#      ddl-auto: create-drop
+#      ddl-auto: none
+      ddl-auto: create-drop
 
 #    javax:
 #      persistence:

@@ -26,8 +26,22 @@ class UserRepositoryTest {
     @Autowired
     private CommunityItemRepository communityItemRepository;
 
-    @Autowired
-    private EntityManager em;
+    private User givenUser() { // 유저생성
+        User user = new User();
+        user.setNickName("판교 건물주");
+        user.setAccountType(AccountType.LESSEE);
+        user.setAccountId(AccountType.LESSEE + " 41");
+        user.setQuit("N");
+        return userRepository.save(user);
+    }
+
+    private CommunityItem givenCommunityItems(User user) { // 게시글 생성
+        CommunityItem communityItem = new CommunityItem();
+        communityItem.setUser(user);
+
+        communityItem.setContents("잘썼어요");
+        return communityItemRepository.save(communityItem);
+    }
 
     @Test
     @Description("User를 생성, 저장 검증")
@@ -86,28 +100,4 @@ class UserRepositoryTest {
 
         assertThat(id).isEqualTo(userByInItemList);
     }
-
-
-
-
-
-    private User givenUser() {
-        User user = new User();
-        user.setNickName("판교 건물주");
-        user.setAccountType(AccountType.LESSEE);
-        user.setAccountId(AccountType.LESSEE + " 41");
-        user.setQuit("N");
-        return userRepository.save(user);
-    }
-
-
-    private CommunityItem givenCommunityItems(User user) {
-        CommunityItem communityItem = new CommunityItem();
-        communityItem.setUser(user);
-
-        communityItem.setContents("잘썼어요");
-        return communityItemRepository.save(communityItem);
-    }
-
-
 }

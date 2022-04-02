@@ -35,18 +35,22 @@ public class LikesService {
         Optional<User> findUser = Utils.getUser(authorization, userRepository);
         if(!findUser.isPresent()) throw new NoSuchElementException("해당 유저가 존재하지 않습니다.");
 
-        Optional<Likes> getLikes = likesRepository.findByUserIdAndItemId(findUser.get().getId(), itemId);
+        // 좋아요 유무 파악
+        if (isLiked(itemId, getItem, findUser)) return;
+        Utils.createLikes(findUser.get(), getItem.get(), likesRepository);
+    }
 
-        if(getLikes.isPresent()) { // 좋아요가 존재할 경우
-            likesRepository.deleteById(getLikes.get().getId());
+    private boolean isLiked(Long itemId, Optional<CommunityItem> getItem, Optional<User> findUser) {
+        Optional<Likes> likeByUser = likesRepository.findByUserIdAndItemId(findUser.get().getId(), itemId);
+
+        if(likeByUser.isPresent()) { // 좋아요가 존재할 경우
+            Long likeId = likeByUser.get().getId();
+            likesRepository.deleteById(likeId);
 
             List<Likes> likedList = getItem.get().getLikedList();
-            for (int i = 0; i < likedList.size(); i++) {
-                if(likedList.get(i).getId() == getLikes.get().getId()) likedList.remove(i);
-            }
-
-            return;
+            likedList.removeIf(v -> v.getId() == likeId);
+            return true;
         }
-        Utils.createLikes(findUser.get(), getItem.get(), likesRepository);
+        return false;
     }
 }

@@ -69,7 +69,7 @@ public class CommunityItemService {
         1. authorization 데이터를 이용하여 user find()
         2. CommunityItem update
      */
-    public ResponseDTO.ResData update(CommunityItemDTO.UpdateItemDTO itemDTO, Long itemId) {
+    public ResponseDTO.ResData updateItem(CommunityItemDTO.UpdateItemDTO itemDTO, Long itemId) {
         Optional<CommunityItem> getItem = itemRepo.findById(itemId);
         if(!getItem.isPresent()) throw new NoSuchElementException("해당 게시물이 존재하지 않습니다.");
 

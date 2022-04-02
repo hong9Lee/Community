@@ -24,6 +24,29 @@ class LikesRepositoryTest {
     @Autowired private UserRepository userRepository;
     @Autowired private CommunityItemRepository communityItemRepository;
 
+    private Likes givenLikes(CommunityItem communityItem, User user) {
+        Likes likes = new Likes();
+        likes.setCommunityItem(communityItem);
+        likes.setUser(user);
+        return likes;
+    }
+
+    private User givenUser(String nickName, String accountId) {
+        User user = new User();
+        user.setNickName(nickName);
+        user.setAccountType(AccountType.LESSEE);
+        user.setAccountId(AccountType.LESSEE + " " + accountId);
+        user.setQuit("N");
+        return userRepository.save(user);
+    }
+
+
+    private CommunityItem givenCommunityItems(String contents, User user) {
+        CommunityItem communityItem = new CommunityItem();
+        communityItem.setContents(contents);
+        communityItem.setUser(user);
+        return communityItemRepository.save(communityItem);
+    }
 
     @Test
     @Description("좋아요 갯수 검증")
@@ -66,29 +89,5 @@ class LikesRepositoryTest {
     }
 
 
-    private Likes givenLikes(CommunityItem communityItem, User user) {
-        Likes likes = new Likes();
-        likes.setCommunityItem(communityItem);
-        likes.setUser(user);
-        return likes;
-    }
 
-
-
-    private User givenUser(String nickName, String accountId) {
-        User user = new User();
-        user.setNickName(nickName);
-        user.setAccountType(AccountType.LESSEE);
-        user.setAccountId(AccountType.LESSEE + " " + accountId);
-        user.setQuit("N");
-        return userRepository.save(user);
-    }
-
-
-    private CommunityItem givenCommunityItems(String contents, User user) {
-        CommunityItem communityItem = new CommunityItem();
-        communityItem.setContents(contents);
-        communityItem.setUser(user);
-        return communityItemRepository.save(communityItem);
-    }
 }
